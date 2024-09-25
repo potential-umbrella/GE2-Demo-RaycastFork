@@ -1,4 +1,5 @@
-﻿using UnityEditor.SearchService;
+﻿using System;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    AsyncOperation ao;
+
     [Header("Script References")]
     public GameStateManager _gameStateManager;
     public CameraManager _cameraManager;
@@ -59,7 +62,37 @@ public class LevelManager : MonoBehaviour
         Application.Quit();
     }
 
+    void OnLoadFinish(AsyncOperation operation)
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "MainMenu": _uIManager.DisableLoadScreen(_uIManager.mainMenuUI); break;
+            case "TestLevel": _uIManager.DisableLoadScreen(_uIManager.gamePlayUI); break;
+        }
+    }
 
+    void LoadScene(string name)
+    {
+        switch (name)
+        {
+            case "MainMenu": _uIManager.UILoadingScreen(_uIManager.mainMenuUI); _gameStateManager.SwitchToState(_gameStateManager.gameState_GameInit); break;
+            case "TestLevel":
+                _uIManager.UILoadingScreen(_uIManager.gamePlayUI);
+                _gameStateManager.SwitchToState(_gameStateManager.gameState_GamePlay);
+                break;
+        }
+    }
+
+    void StartSceneLoad(string name)
+    {
+        ao = SceneManager.LoadSceneAsync(name);
+        ao.completed += OnLoadFinish;
+    }    
+
+    public float GetLoadProgress()
+    {
+        return ao.progress;
+    }
 
 }
 
