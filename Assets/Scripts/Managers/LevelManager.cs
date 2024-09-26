@@ -74,7 +74,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void LoadScene(string name)
+    public void LoadScene(string name)
     {
         switch (name)
         {
