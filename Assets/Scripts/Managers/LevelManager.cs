@@ -21,6 +21,8 @@ public class LevelManager : MonoBehaviour
 
     public int nextScene;
 
+    // Important scene refs.
+    [SerializeField] string mainMenuName = "MainMenu";
 
     public void Awake()
     {
@@ -39,21 +41,22 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextlevel()
     {
+        // I feel like this is a wonky way of connecting the other loadscene, but it should work.
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
-        LoadScene(nextScene);
-        _gameStateManager.SwitchToState(_gameStateManager.gameState_GamePlay);       
+        LoadScene(SceneManager.GetSceneByBuildIndex(nextScene).name);
+        _gameStateManager.SwitchToState(_gameStateManager.gameState_GamePlay);
     }
 
 
     public void LoadMainMenuScene()
     {
-        LoadScene(0);
+        LoadScene(mainMenuName);
         _gameStateManager.SwitchToState(_gameStateManager.gameState_GameInit);
     }
 
     public void ReloadCurrentScene()
     {
-        LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LoadScene(SceneManager.GetActiveScene().name);
         _gameStateManager.SwitchToState(_gameStateManager.gameState_GamePlay);
     }
 
