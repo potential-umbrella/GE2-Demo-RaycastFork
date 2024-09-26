@@ -66,11 +66,22 @@ public class LevelManager : MonoBehaviour
     }
 
     void OnLoadFinish(AsyncOperation operation)
+    void OnLoadFinish(AsyncOperation ignored) { OnLoadFinish(); }
+    void OnLoadFinish(Scene ignored1, LoadSceneMode ignored2) { OnLoadFinish(); }
+    void OnLoadFinish()
     {
-        switch (SceneManager.GetActiveScene().name)
+        string s = SceneManager.GetActiveScene().name;
+        switch (s)
         {
-            case "MainMenu": _uIManager.DisableLoadScreen(_uIManager.mainMenuUI); break;
-            case "TestLevel": _uIManager.DisableLoadScreen(_uIManager.gamePlayUI); break;
+            case "MainMenu":
+                _uIManager.DisableLoadScreen(
+                //_uIManager.mainMenuUI
+                                                          ); break;
+            case "TestLevel":
+                _uIManager.DisableLoadScreen(
+                //_uIManager.gamePlayUI
+                                                           ); break;
+            default: Debug.LogError(new NotImplementedException($"{s} is not implemented in load finish.")); break;
         }
     }
 
@@ -78,12 +89,23 @@ public class LevelManager : MonoBehaviour
     {
         switch (name)
         {
-            case "MainMenu": _uIManager.UILoadingScreen(_uIManager.mainMenuUI); _gameStateManager.SwitchToState(_gameStateManager.gameState_GameInit); break;
+            case "MainMenu":
+                _uIManager.UILoadingScreen(
+                //_uIManager.mainMenuUI
+                );
+                _gameStateManager.SwitchToState(_gameStateManager.gameState_GameInit); break;
             case "TestLevel":
-                _uIManager.UILoadingScreen(_uIManager.gamePlayUI);
+                _uIManager.UILoadingScreen(
+                    //_uIManager.gamePlayUI
+                    );
                 _gameStateManager.SwitchToState(_gameStateManager.gameState_GamePlay);
                 break;
+            default: Debug.LogError(new NotImplementedException($"{name} is not implemented in scene load start. Cancelling load.")); return;
         }
+
+        // Actually load the scene.
+        SceneManager.LoadSceneAsync(name);
+        SceneManager.sceneLoaded += OnLoadFinish;
     }
 
     void StartSceneLoad(string name)
