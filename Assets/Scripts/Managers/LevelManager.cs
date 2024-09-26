@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,8 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    AsyncOperation ao;
-
     [Header("Script References")]
     public GameStateManager _gameStateManager;
     public CameraManager _cameraManager;
@@ -47,7 +44,6 @@ public class LevelManager : MonoBehaviour
         _gameStateManager.SwitchToState(_gameStateManager.gameState_GamePlay);
     }
 
-
     public void LoadMainMenuScene()
     {
         LoadScene(mainMenuName);
@@ -65,8 +61,6 @@ public class LevelManager : MonoBehaviour
         Application.Quit();
     }
 
-    void OnLoadFinish(AsyncOperation operation)
-    void OnLoadFinish(AsyncOperation ignored) { OnLoadFinish(); }
     void OnLoadFinish(Scene ignored1, LoadSceneMode ignored2) { OnLoadFinish(); }
     void OnLoadFinish()
     {
@@ -107,19 +101,4 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadSceneAsync(name);
         SceneManager.sceneLoaded += OnLoadFinish;
     }
-
-    void StartSceneLoad(string name)
-    {
-        ao = SceneManager.LoadSceneAsync(name);
-        ao.completed += OnLoadFinish;
-    }    
-
-    public float GetLoadProgress()
-    {
-        return ao.progress;
-    }
-
 }
-
-
-
