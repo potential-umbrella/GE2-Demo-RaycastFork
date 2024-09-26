@@ -92,17 +92,17 @@ public class UIManager : MonoBehaviour
         creditsMenuUI.SetActive(false);
     }
 
-    internal void UILoadingScreen(GameObject targetUI)
+    public void UILoadingScreen()
     {
-        DisableAllUIPanels();
         loadScreenUI.SetActive(true);
     }
 
-    public void DisableLoadScreen(GameObject targetUI)
+    public void DisableLoadScreen(//GameObject targetUI)
+        )
     {
         loadScreenUI.SetActive(false);
-        if(targetUI == gamePlayUI) { gamePlayUI.SetActive(true); }
-        else if(targetUI == mainMenuUI) { mainMenuUI.SetActive(true); }
-        throw new NotImplementedException();
+        //if(targetUI == gamePlayUI) { gamePlayUI.SetActive(true); }
+        //else if(targetUI == mainMenuUI) { mainMenuUI.SetActive(true); }
+        //Debug.LogError(new NotImplementedException());
     }
 }
