@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 // Sam Robichaud 
@@ -29,7 +27,7 @@ public class PlayerLocomotionHandler : MonoBehaviour
     private Vector3 moveDirection;
     private Vector3 velocity;
     private bool isJumping = false; // Track if player is currently jumping
- 
+
 
     private void Awake()
     {
@@ -47,45 +45,45 @@ public class PlayerLocomotionHandler : MonoBehaviour
 
     private void HandlePlayerMovement()
     {
-     
-        
-            // Normal movement calculation
-            moveDirection = cameraTransform.forward * inputManager.verticalInput;
-            moveDirection += cameraTransform.right * inputManager.horizontalInput;
-            moveDirection.Normalize();
-            moveDirection.y = 0;
 
-            // Adjust speed based on sprinting, jogging, or walking
-            if (isSprinting)
-            {
-                moveDirection *= sprintingSpeed;
-            }
-            else if (inputManager.moveAmount >= 0.5f)
-            {
-                moveDirection *= joggingSpeed;
-            }
-            else
-            {
-                moveDirection *= walkingSpeed;
-            }
 
-            // Apply gravity
-            if (characterController.isGrounded)
-            {
-                isJumping = false;
-                if (velocity.y < 0)
-                {
-                    velocity.y = -2f; // Small downward force to stay grounded
-                }
-            }
-            else
-            {
-                velocity.y += gravity * Time.deltaTime; // Apply gravity when not grounded
-            }
+        // Normal movement calculation
+        moveDirection = cameraTransform.forward * inputManager.verticalInput;
+        moveDirection += cameraTransform.right * inputManager.horizontalInput;
+        moveDirection.Normalize();
+        moveDirection.y = 0;
 
-            // Move the character controller
-            characterController.Move(moveDirection * Time.deltaTime + velocity * Time.deltaTime);
-        
+        // Adjust speed based on sprinting, jogging, or walking
+        if (isSprinting)
+        {
+            moveDirection *= sprintingSpeed;
+        }
+        else if (inputManager.moveAmount >= 0.5f)
+        {
+            moveDirection *= joggingSpeed;
+        }
+        else
+        {
+            moveDirection *= walkingSpeed;
+        }
+
+        // Apply gravity
+        if (characterController.isGrounded)
+        {
+            isJumping = false;
+            if (velocity.y < 0)
+            {
+                velocity.y = -2f; // Small downward force to stay grounded
+            }
+        }
+        else
+        {
+            velocity.y += gravity * Time.deltaTime; // Apply gravity when not grounded
+        }
+
+        // Move the character controller
+        characterController.Move(moveDirection * Time.deltaTime + velocity * Time.deltaTime);
+
     }
 
     private void HandlePlayerRotation()
