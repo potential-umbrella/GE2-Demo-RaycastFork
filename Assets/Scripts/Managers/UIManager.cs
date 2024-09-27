@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    
+
     // References to UI Panels
     public GameObject mainMenuUI;
     public GameObject gamePlayUI;
@@ -19,7 +21,7 @@ public class UIManager : MonoBehaviour
     public GameObject creditsMenuUI;
 
     // Load screen image aaa
-    Image loadBar;
+    [SerializeField]RawImage loadBar;
 
     // Gameplay Specific UI Elements
     public Text LevelCount;
@@ -32,7 +34,6 @@ public class UIManager : MonoBehaviour
         if (LevelCount = null)
         { Debug.LogError("LevelCount is not assigned to UIManager in the inspector!"); }
     }
-
 
     public void UIMainMenu()
     {
@@ -100,5 +101,14 @@ public class UIManager : MonoBehaviour
     public void DisableLoadScreen()
     {
         loadScreenUI.SetActive(false);
+    }
+
+    public void UpdateLoadBar(float factor)
+    {
+        // ensure between 0 and 1
+        factor = Mathf.Clamp01(factor);
+
+        Vector2 barScale = loadBar.rectTransform.localScale;
+        barScale.x = factor;
     }
 }

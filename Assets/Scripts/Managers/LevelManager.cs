@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     public PlayerManager _playerManager;
     public UIManager _uIManager;
 
-
+    AsyncOperation loadOperation;
     public int nextScene;
 
     // Important scene refs.
@@ -29,6 +29,16 @@ public class LevelManager : MonoBehaviour
         if (_gameManager == null) { Debug.LogError("GameManager is not assigned to LevelManager in the inspector!"); }
         if (_playerManager == null) { Debug.LogError("PlayerManager is not assigned to LevelManager in the inspector!"); }
         if (_uIManager == null) { Debug.LogError("UIManager is not assigned to LevelManager in the inspector!"); }
+    }
+
+    private void Update()
+    {
+        LoadBarHelper();
+
+        void LoadBarHelper()
+        {
+            if (loadOperation != null) { _uIManager.UpdateLoadBar(loadOperation.progress); }
+        }
     }
 
     void LoadScene(int sceneId)
