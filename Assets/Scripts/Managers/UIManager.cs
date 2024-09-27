@@ -110,5 +110,7 @@ public class UIManager : MonoBehaviour
 
         Vector2 barScale = loadBar.rectTransform.localScale;
         barScale.x = factor;
+
+        loadBar.rectTransform.localScale = barScale;
     }
 }

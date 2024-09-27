@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
 
         void LoadBarHelper()
         {
-            if (loadOperation != null) { _uIManager.UpdateLoadBar(loadOperation.progress); }
+            if (loadOperation != null) { _uIManager.UpdateLoadBar(loadOperation.progress); Debug.Log(loadOperation.progress); }
         }
     }
 
@@ -87,6 +87,9 @@ public class LevelManager : MonoBehaviour
                                                            ); break;
             default: Debug.LogError(new NotImplementedException($"{s} is not implemented in load finish.")); break;
         }
+
+        SceneManager.sceneLoaded -= OnLoadFinish;
+        loadOperation = null;
     }
 
     public void LoadScene(string name)
@@ -108,7 +111,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Actually load the scene.
-        SceneManager.LoadSceneAsync(name);
+        loadOperation = SceneManager.LoadSceneAsync(name);
         SceneManager.sceneLoaded += OnLoadFinish;
     }
 }
