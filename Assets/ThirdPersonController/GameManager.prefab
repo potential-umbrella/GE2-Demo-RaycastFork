@@ -1235,7 +1235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLocomotionHandler: {fileID: 515732063566655833}
   cameraManager: {fileID: 725711720319384260}
-  weaponManager: {fileID: 0}
+  weaponManager: {fileID: 1741261060819447440}
   verticalInput: 0
   horizontalInput: 0
   jumpInput: 0
