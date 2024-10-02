@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour
     public Vector2 cameraInput; // Mouse input for the camera
 
     [Header("Interaction Inputs")]
-    public bool fireInput;
+    public bool fireInput = true;
 
     public bool isPauseKeyPressed = false;
 
@@ -91,6 +91,7 @@ public class InputManager : MonoBehaviour
 
     void HandleFireInput()
     {
-        weaponManager.Fire();
+        fireInput = Input.GetMouseButtonDown(0);
+        if (fireInput) { weaponManager.Fire(); }
     }
 }
