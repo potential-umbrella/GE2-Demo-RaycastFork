@@ -1,3 +1,4 @@
+using Assets.Scripts.Player;
 using UnityEngine;
 
 // Sam Robichaud 
@@ -8,6 +9,7 @@ public class PlayerLocomotionHandler : MonoBehaviour
     [SerializeField] private InputManager inputManager;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private CharacterController characterController;
+    [SerializeField] private PlayerAnimController animController;
 
     [Header("Debugging Values")]
     [SerializeField] public bool isSprinting;
@@ -40,7 +42,8 @@ public class PlayerLocomotionHandler : MonoBehaviour
         HandlePlayerMovement();
         HandlePlayerRotation();
         UpdatePlayerVelocityMagnitude();  // Debugging tool
-
+        // Tell animator to do things. Might be bad practice.
+        animController.SetAnimatorStateWithSpeed(characterController.velocity);
     }
 
     private void HandlePlayerMovement()
