@@ -45,7 +45,10 @@ namespace Assets.Scripts.Managers
 
             // Get new references
             RaycastHit[] allHits = Physics.RaycastAll(transform.position, cameraManager.playerCamera.transform.forward, maxRange);
-            if (debugMode) { Debug.Log($"Caught {allHits.Length} hits."); }
+            if (debugMode) { 
+                Debug.Log($"Caught {allHits.Length} hits.");
+                Debug.DrawRay(transform.position, cameraManager.playerCamera.transform.forward, Color.blue);
+            }
 
             foreach (RaycastHit hitData in allHits)
             {
