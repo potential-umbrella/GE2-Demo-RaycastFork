@@ -91,6 +91,6 @@ public class InputManager : MonoBehaviour
 
     void HandleFireInput()
     {
-        
+        weaponManager.Fire();
     }
 }

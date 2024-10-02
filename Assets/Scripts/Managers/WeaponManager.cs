@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Entities;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,12 @@ namespace Assets.Scripts.Managers
 
         List<TargetableObject> targets = new();
 
+        private void Awake()
+        {
+            if(inputManager == null) { Debug.LogException(new Exception("inputman was null. this bad.")); }
+            if(cameraManager == null) { Debug.LogException(new Exception("cameraman was null. this bad.")); }
+        }
+
         private void Update()
         {
             UpdateTargets();
@@ -32,6 +39,11 @@ namespace Assets.Scripts.Managers
         /// </summary>
         public void UpdateTargets()
         {
+            // Reset targeting state and then discard.
+            foreach(TargetableObject target in targets) { target.SetTarget(false); }
+            targets.Clear();
+
+            // Get new references
             RaycastHit[] allHits = Physics.RaycastAll(transform.position, cameraManager.playerCamera.transform.forward, maxRange);
             if (debugMode) { Debug.Log($"Caught {allHits.Length} hits."); }
 
@@ -40,6 +52,7 @@ namespace Assets.Scripts.Managers
                 if (hitData.transform.gameObject.TryGetComponent(out TargetableObject target))
                 {
                     targets.Add(target);
+                    target.SetTarget(true);
                 }
             }
         }
