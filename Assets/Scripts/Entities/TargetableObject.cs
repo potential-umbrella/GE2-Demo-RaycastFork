@@ -9,6 +9,6 @@ namespace Assets.Scripts.Entities
     /// </summary>
     public abstract class TargetableObject : MonoBehaviour
     {
-        public abstract void OnTarget();
+        public abstract void SetTarget(bool state);
     }
 }
