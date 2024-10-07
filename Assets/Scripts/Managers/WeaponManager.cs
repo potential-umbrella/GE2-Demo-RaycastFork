@@ -73,6 +73,9 @@ namespace Assets.Scripts.Managers
             }
         }
 
+        /// <summary>
+        /// Called when the player clicks with LMB
+        /// </summary>
         public void Fire()
         {
             // Update targets just in case they are out of date.
