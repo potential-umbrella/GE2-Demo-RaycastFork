@@ -50,6 +50,7 @@ namespace Assets.Scripts.Managers
                 Debug.DrawRay(transform.position, cameraManager.playerCamera.transform.forward, Color.blue);
             }
 
+            // For every hit, if it has a targetable, add it as a target.
             foreach (RaycastHit hitData in allHits)
             {
                 if (hitData.transform.gameObject.TryGetComponent(out TargetableObject target))
