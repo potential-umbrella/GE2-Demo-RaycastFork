@@ -35,11 +35,11 @@ public class InputManager : MonoBehaviour
         HandlePauseKeyInput();
     }
 
-    void OnMove(InputValue blerg) { movementInput = blerg.Get<Vector2>(); }
-    void OnLook(InputValue blerg) { cameraInput = blerg.Get<Vector2>();}
-    void OnSprint(InputValue blerg) { sprintInput = blerg.Get<float>() == 1; }
-    void OnJump(InputValue blerg) { playerLocomotionHandler.HandleJump(); }
-    void OnFire(InputValue blerg) { Debug.LogException(new NotImplementedException("This is implemented in 1.4.0")); }
+    void OnMove(InputValue value) { movementInput = value.Get<Vector2>(); }
+    void OnLook(InputValue value) { cameraInput = value.Get<Vector2>(); }
+    void OnSprint(InputValue value) { sprintInput = value.Get<float>() == 1; }
+    void OnJump(InputValue value) { playerLocomotionHandler.HandleJump(); }
+    void OnFire(InputValue value) { Debug.LogException(new NotImplementedException("This is implemented in 1.4.0")); }
 
     private void HandleCameraInput()
     {
