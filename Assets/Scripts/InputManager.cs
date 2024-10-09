@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleSprintingInput();
-        HandleJumpInput();
+        //HandleJumpInput();
         HandleCameraInput();
         HandlePauseKeyInput();
     }
@@ -48,7 +48,7 @@ public class InputManager : MonoBehaviour
     private void HandleCameraInput()
     {        
             // Get mouse input for the camera
-            cameraInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            //cameraInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
             // Get scroll input for camera zoom
             scrollInput = Input.GetAxis("Mouse ScrollWheel");
@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour
 
     private void HandleMovementInput()
     {
-        movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        //movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         horizontalInput = movementInput.x;
         verticalInput = movementInput.y;
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
@@ -73,7 +73,7 @@ public class InputManager : MonoBehaviour
 
     private void HandleSprintingInput()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && moveAmount > 0.5f)
+        if (sprintInput && moveAmount > 0.5f)
         {
             playerLocomotionHandler.isSprinting = true;
         }
