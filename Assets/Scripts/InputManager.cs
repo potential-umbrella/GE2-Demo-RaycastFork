@@ -91,9 +91,4 @@ public class InputManager : MonoBehaviour
             playerLocomotionHandler.HandleJump(); // Trigger jump in locomotion handler
         }
     }
-
-
-
-
-
 }
