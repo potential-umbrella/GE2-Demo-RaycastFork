@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // Sam Robichaud 
 // NSCC Truro 2024
@@ -17,6 +19,7 @@ public class InputManager : MonoBehaviour
     public float verticalInput;
     public float horizontalInput;
     public bool jumpInput;
+    public bool sprintInput;
     public Vector2 movementInput;
     public float moveAmount;
 
@@ -35,6 +38,12 @@ public class InputManager : MonoBehaviour
         HandleCameraInput();
         HandlePauseKeyInput();
     }
+
+    void OnMove(InputValue blerg) { movementInput = blerg.Get<Vector2>(); }
+    void OnLook(InputValue blerg) { cameraInput = blerg.Get<Vector2>();}
+    void OnSprint(InputValue blerg) { sprintInput = blerg.Get<float>() == 1; }
+    void OnJump(InputValue blerg) { playerLocomotionHandler.HandleJump(); }
+    void OnFire(InputValue blerg) { Debug.LogException(new NotImplementedException("This is implemented in 1.4.0")); }
 
     private void HandleCameraInput()
     {        
