@@ -18,7 +18,6 @@ public class InputManager : MonoBehaviour
     [Header("Movement Inputs")]
     public float verticalInput;
     public float horizontalInput;
-    public bool jumpInput;
     public bool sprintInput;
     public Vector2 movementInput;
     public float moveAmount;
@@ -34,7 +33,6 @@ public class InputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleSprintingInput();
-        //HandleJumpInput();
         HandleCameraInput();
         HandlePauseKeyInput();
     }
@@ -80,15 +78,6 @@ public class InputManager : MonoBehaviour
         else
         {
             playerLocomotionHandler.isSprinting = false;
-        }
-    }
-
-    private void HandleJumpInput()
-    {
-        jumpInput = Input.GetKeyDown(KeyCode.Space); // Detect jump input (spacebar)
-        if (jumpInput)
-        {
-            playerLocomotionHandler.HandleJump(); // Trigger jump in locomotion handler
         }
     }
 }
