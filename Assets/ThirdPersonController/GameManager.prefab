@@ -4010,6 +4010,7 @@ GameObject:
   - component: {fileID: 1308513348906308259}
   - component: {fileID: 515732063566655833}
   - component: {fileID: 322026907196466210}
+  - component: {fileID: 4307624192409975690}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -4105,6 +4106,25 @@ CharacterController:
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.00001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4307624192409975690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7034935583075056663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70dfe19493e57984baac786aa8a3e967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camMan: {fileID: 725711720319384260}
+  cubeFilter:
+    serializedVersion: 2
+    m_Bits: 128
+  ground:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &7223833058263259775
 GameObject:
   m_ObjectHideFlags: 0
