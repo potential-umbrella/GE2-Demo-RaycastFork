@@ -9,10 +9,12 @@ namespace Assets.Scripts.Managers
         Camera playerCam;
 
         [SerializeField] float defaultDistance = 10;
+
+        // ticking stuff. better to encapsulate this into a "tickprovider" class or something.
         [SerializeField] int raycastInterval = 5;
         int tickCount = 1;
 
-        //
+        // Layer masks.
         [SerializeField] LayerMask cubeFilter;
         [SerializeField] LayerMask ground;
 
@@ -30,18 +32,23 @@ namespace Assets.Scripts.Managers
                 tickCount = 1;
 
                 float distance = defaultDistance;
-                // raycast and draw ray. DO NOT DO THIS EVERY FRAME! I'M JUST SILLY!
-                if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, 10, ground.value))
+
+                // Get the camera's position, which we'll use as the origin.
+                Vector3 camPos = playerCam.transform.position;
+                // get the camera's forward direction, which we use as the raycast's direction.
+                Vector3 camForward = playerCam.transform.forward;
+
+                // raycast and draw ray. DO NOT DO THIS EVERY FRAME! (I don't do this anymore! :) )
+                if (Physics.Raycast(camPos, camForward, out RaycastHit hit, 10, ground.value))
                 {
                     distance = hit.distance;
                 }
                 Debug.Log($"Distance is {distance}");
 
-                // Debug.
-                Vector3 camPos = playerCam.transform.position;
-                Debug.DrawLine(camPos, camPos + playerCam.transform.forward * 10);
+                // Debug. Adding camera position to an upscaled forward vector makes an end point further out.
+                Debug.DrawLine(camPos, camPos + camForward * distance);
 
-                RaycastHit[] hits = Physics.RaycastAll(playerCam.transform.position, playerCam.transform.forward, distance, cubeFilter.value);
+                RaycastHit[] hits = Physics.RaycastAll(camPos, camForward, distance, cubeFilter.value);
                 foreach (RaycastHit hit2 in hits)
                 {
                     if (hit2.collider.TryGetComponent(out Renderer renderer))
